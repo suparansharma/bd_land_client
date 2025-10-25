@@ -1,0 +1,46 @@
+# Dependencies
+/node_modules/
+
+# Next.js build output
+.next/
+out/
+dist/
+
+# Production
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Cache / Coverage
+.eslintcache
+coverage/
+nyc_output/
+.cache/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Misc
+*.tsbuildinfo
+.vercel/
