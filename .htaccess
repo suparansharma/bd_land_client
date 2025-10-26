@@ -17,7 +17,7 @@
     RewriteRule ^([^/]+)/properties/?$ [locale]/properties/index.html [L]
     RewriteRule ^([^/]+)/projects/featured-projects/?$ [locale]/projects/featured-projects/index.html [L]
     RewriteRule ^([^/]+)/projects/ [locale]/projects/index.html [L]
-    RewriteRule ^([^/]+)/user/(.+)/?$ [locale]/user/[slug]/index.html [L]
+    RewriteRule ^([^/]+)/user/(.+)/?$ [locale]/user/[...slug]/index.html [L]
     RewriteRule ^([^/]+)/(about-us|contact-us|faqs|privacy-policy|terms-and-conditions|subscription-plan|search|all-personalized-feeds|properties-on-map)/?$ [locale]/$2/index.html [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
