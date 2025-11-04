@@ -216,21 +216,28 @@ const Header = () => {
       dispatch(setIsFetched({ data: true }));
       dispatch(setIsLanguageLoaded({ data: true }));
 
-      // Update URL to reflect language change
-      let newPath = router.asPath;
+      // Update URL to reflect language change (robust handling)
+      // Preserve query and hash, and correctly replace or insert the locale segment
+      const url = new URL(window.location.origin + router.asPath);
+      const search = url.search || "";
+      const hash = url.hash || "";
 
-      // Handle root path
-      if (newPath === '/') {
-        newPath = `/${newLang}`;
+      // Normalize pathname and split into segments without leading slash
+      const availableCodes = (languages || []).map(l => l.code);
+      const parts = url.pathname.replace(/^\/+/, "").split("/").filter(Boolean);
+
+      if (parts.length === 0) {
+        // Root path
+        parts.unshift(newLang);
+      } else if (availableCodes.includes(parts[0])) {
+        // Replace existing locale
+        parts[0] = newLang;
+      } else {
+        // Insert locale at the start
+        parts.unshift(newLang);
       }
-      // Handle path with existing locale
-      else if (locale) {
-        newPath = newPath.replace(`/${locale}/`, `/${newLang}/`);
-      }
-      // Handle path without locale
-      else if (newPath.startsWith('/')) {
-        newPath = `/${newLang}${newPath}`;
-      }
+
+      const newPath = "/" + parts.join("/") + search + hash;
 
       // Use router.push with shallow option to prevent triggering getServerSideProps
       router.push(newPath, undefined, { shallow: true });

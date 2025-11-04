@@ -37,13 +37,13 @@ export default function Home() {
       try {
         const settings = await fetchWebSettings();
         setSettingsData(settings);
-        const defaultLanguage = settings?.data?.default_language ?? "en-new";
+        const defaultLanguage = settings?.data?.default_language ?? "en";
         router.replace(`/${defaultLanguage}`);
         dispatch(setDefaultLanguage({ data: defaultLanguage }));
       } catch (error) {
         console.error("Error during redirection:", error);
         // Fallback to English if something goes wrong
-        router.replace("/en-new");
+        router.replace("/en");
       } finally {
         setIsLoading(false);
       }

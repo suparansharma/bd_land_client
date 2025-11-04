@@ -464,6 +464,8 @@ const UserDashboard = () => {
 
     // Render verification content based on status
     const renderVerificationContent = () => {
+        console.log('userVerificationStatus', userVerificationStatus);
+        return;
         switch (userVerificationStatus) {
             case "success":
                 return (

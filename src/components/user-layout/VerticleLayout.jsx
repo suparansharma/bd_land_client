@@ -111,16 +111,27 @@ const VerticleLayout = ({ children }) => {
 
 
     const handleResize = () => {
-        setIsMobile(window.innerWidth < 768);
+        const mobile = window.innerWidth < 768;
+        setIsMobile(mobile);
+        // Always keep sidebar open on desktop/laptop, allow toggle on mobile
+        setOpen(!mobile);
     };
 
     useEffect(() => {
+        // Set initial state based on current viewport
+        const mobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+        setIsMobile(mobile);
+        setOpen(!mobile);
+
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const toggleDrawer = () => {
-        setOpen((prev) => !prev);
+        // Disable toggling on desktop so sidebar stays static/visible
+        if (isMobile) {
+            setOpen((prev) => !prev);
+        }
     };
 
 

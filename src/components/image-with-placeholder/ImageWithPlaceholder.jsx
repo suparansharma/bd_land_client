@@ -17,8 +17,7 @@ const ImageWithPlaceholder = ({
   const [isLoading, setIsLoading] = useState(true); // New state for loading
   const [isError, setIsError] = useState(false)
 
-  console.log('webSettings',webSettings)
-  console.log('imageSrc',imageSrc)
+
 
   useEffect(() => {
     if (!src || src === "") {

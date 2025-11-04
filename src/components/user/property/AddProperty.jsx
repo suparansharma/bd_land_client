@@ -330,11 +330,11 @@ const AddProperty = () => {
                     missingFields = true;
                     break;
                 }
-                if (!selectedLocationAddress.country) {
-                    toast.error(t("countryIsRequired"));
-                    missingFields = true;
-                    break;
-                }
+                // if (!selectedLocationAddress.country) {
+                //     toast.error(t("countryIsRequired"));
+                //     missingFields = true;
+                //     break;
+                // }
                 if (!selectedLocationAddress.formattedAddress) {
                     toast.error(t("addressIsRequired"));
                     missingFields = true;

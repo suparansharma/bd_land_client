@@ -38,7 +38,8 @@ api.interceptors.request.use(
       if (localeCode) {
         config.headers["Content-Language"] = localeCode;
       }
-      config.headers["Content-Type"] = "multipart/form-data";
+      // Do not force Content-Type; let axios set it based on request body.
+      // If you set multipart/form-data manually, the boundary is missing and servers may reject.
       // config.headers["x-access-key"] = access_key
       return config;
     } catch (error) {
@@ -83,11 +84,14 @@ api.interceptors.response.use(
       });
     }
     if (error?.response?.status === 401) {
-      console.error("Unauthorized access - Logging out user");
-      store.dispatch(logout());
-      Router.push("/");
-      // Optionally, you can redirect to login page here
-      // window.location.href = '/login';
+      const token = await getStoredToken();
+      // Only force logout if a token exists (i.e., user is actually logged in)
+      if (token) {
+        console.error("Unauthorized access - Logging out user");
+        store.dispatch(logout());
+        Router.push("/");
+      }
+      // If no token, it's likely during app boot or a public call; don't dispatch logout.
     }
     return Promise.reject(error?.response?.data);
   },

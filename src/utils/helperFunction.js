@@ -437,7 +437,8 @@ export const handlePackageCheck = async (
 
   const userData = User?.data;
   const systemSettingsData = WebSetting?.data;
-  const locale = LanguageSettings?.default_language || "en-new";
+  const locale = LanguageSettings?.default_language || "en";
+
 
   if (!userData?.id) {
     return showSwal({
@@ -478,34 +479,36 @@ export const handlePackageCheck = async (
     const needToVerify = systemSettingsData?.verification_required_for_user;
     const verificationStatus = systemSettingsData?.verification_status;
 
-    if (needToVerify && verificationStatus !== "success") {
-      const statusMessages = {
-        pending: {
-          icon: "warning",
-          title: t("verifyPendingTitle"),
-          text: t("verifyPendingDesc"),
-          t
-        },
-        failed: {
-          icon: "error",
-          title: t("verifyFailTitle"),
-          text: t("verifyFailDesc"),
-          onConfirm: () => router.push(`/${locale}/user/dashboard`),
-          t
-        },
-        default: {
-          icon: "error",
-          title: t("oops"),
-          text: t("youHaveNotVerifiedUser"),
-          onConfirm: () => router.push(`/${locale}/user/verification-form/`),
-          t
-        },
-      };
 
-      return showSwal(
-        statusMessages[verificationStatus] || statusMessages.default,
-      );
-    }
+
+    // if (needToVerify && verificationStatus !== "success") {
+    //   const statusMessages = {
+    //     pending: {
+    //       icon: "warning",
+    //       title: t("verifyPendingTitle"),
+    //       text: t("verifyPendingDesc"),
+    //       t
+    //     },
+    //     failed: {
+    //       icon: "error",
+    //       title: t("verifyFailTitle"),
+    //       text: t("verifyFailDesc"),
+    //       onConfirm: () => router.push(`/${locale}/user/dashboard`),
+    //       t
+    //     },
+    //     default: {
+    //       icon: "error",
+    //       title: t("oops"),
+    //       text: t("youHaveNotVerifiedUser"),
+    //       onConfirm: () => router.push(`/${locale}/user/verification-form/`),
+    //       t
+    //     },
+    //   };
+
+    //   return showSwal(
+    //     statusMessages[verificationStatus] || statusMessages.default,
+    //   );
+    // }
   }
 
   // Special case handling for premium properties
