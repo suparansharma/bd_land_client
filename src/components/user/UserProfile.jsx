@@ -10,6 +10,7 @@ import { BiSolidImageAdd } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
 import { Autocomplete } from "@react-google-maps/api";
 import { HiOutlineMapPin } from "react-icons/hi2";
+import { useRouter } from 'next/router';
 
 import toast from 'react-hot-toast';
 import {
@@ -32,6 +33,8 @@ import Swal from 'sweetalert2';
 const UserProfile = () => {
     const t = useTranslation();
     const dispatch = useDispatch();
+    const router = useRouter();
+    const { locale } = router?.query || {};
 
     const userData = useSelector(state => state.User?.data);
     const webSettings = useSelector(state => state.WebSetting?.data);
@@ -323,6 +326,9 @@ const UserProfile = () => {
                 }));
             }
             toast.success(t("profileUpdatedSuccessfully"));
+            // Redirect to subscription plan after successful profile update
+            const target = locale ? `/${locale}/subscription-plan/` : `/subscription-plan/`;
+            router.push(target);
         } catch (error) {
             console.error(error);
             toast.error(t("profileUpdateFailed"));

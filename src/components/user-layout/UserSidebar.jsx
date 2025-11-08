@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/router";
 import { BiDollarCircle } from "react-icons/bi";
-import { FaRegBell } from "react-icons/fa";
+import { FaRegBell, FaRegCreditCard } from "react-icons/fa";
 import {
   MdBusiness,
   MdDeleteOutline,
@@ -202,6 +202,11 @@ const UserSidebar = ({ isMobile = false, open = false, toggleDrawer }) => {
       title: t("mySubscriptions"),
       icon: BiDollarCircle,
       url: "/user/subscription",
+    },
+    {
+      title: "Subscription Plan",
+      icon: FaRegCreditCard,
+      url: "/subscription-plan/",
     },
     {
       title: t("transactionHistory"),

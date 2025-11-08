@@ -380,10 +380,13 @@ const UserSubscription = () => {
     return (
         <div className="w-full px-4 sm:px-6 lg:container lg:mx-auto py-4 sm:py-8 relative" ref={containerRef}>
 
-            <div className="mb-4 sm:mb-6">
+            <div className="mb-4 sm:mb-6 flex items-center justify-between gap-3">
                 <h2 className="text-xl sm:text-2xl font-bold">
                     {t("mySubscriptions")}
                 </h2>
+                <CustomLink href="/subscription-plan" className="primaryBg text-white px-4 py-2 font-bold rounded-md">
+                    Upgrade Subscriptions
+                </CustomLink>
             </div>
 
             {isLoading ? (
