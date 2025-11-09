@@ -1618,38 +1618,46 @@ const handleEmailOtpVerification = async (e) => {
   setShowLoader(true);
 
   try {
+    const email = registerFormData?.email || signInFormData?.email;
+    if (!email) {
+      toast.error(t("emailRequired"));
+      setShowLoader(false);
+      return;
+    }
+
     const response = await verifyOTP({
-      email: registerFormData?.email
-        ? registerFormData?.email
-        : signInFormData?.email,
+      email: email,
       otp: emailOtp,
     });
 
     if (response?.status) {
-      toast.success(t(response?.message || "Login successful"));
-
-      // ✅ If backend returns user and token, store them
+      toast.success(t(response?.message || "Email verified successfully!"));
+      
+      // If backend returns user and token, log the user in
       if (response.user && response.token) {
+        // Store user data and token in your auth state
         dispatch(setAuth({ data: response.user }));
         dispatch(setJWTToken({ data: response.token }));
+        
+        // Close the modal
+        onCloseLogin();
+      } else {
+        // If no user/token in response, redirect to login
+        setShowOTPContent(false);
+        setShowEmailContent(true);
+        toast.success(t("emailVerifiedLoginNow"));
       }
-
-      // ✅ Reset UI states
-      setShowOTPContent(false);
-      setShowEmailContent(true);
+      
+      // Reset states
       setEmailReverify(false);
       setIsEmailOtpEnabled(false);
-      setShowLoader(false);
-
-      // ✅ Close login modal if available
-      if (typeof onCloseLogin === "function") onCloseLogin();
     } else {
       toast.error(t(response?.message || "OTP verification failed"));
-      setShowLoader(false);
     }
   } catch (error) {
-    console.error(error);
-    toast.error(t(error?.message || "Something went wrong"));
+    console.error("OTP Verification Error:", error);
+    toast.error(t(error?.message || "Something went wrong. Please try again."));
+  } finally {
     setShowLoader(false);
   }
 };
