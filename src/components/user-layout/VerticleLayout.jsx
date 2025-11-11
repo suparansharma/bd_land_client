@@ -69,7 +69,7 @@ const VerticleLayout = ({ children }) => {
             if (!res?.error) {
                 dispatch(setWebSettings({ data: res.data }));
                 document.documentElement.lang = currentLang?.code;
-                document.documentElement.dir = currentLang?.rtl ? "rtl" : "ltr";
+                document.documentElement.dir = "ltr"; // Always set to LTR
 
                 document.documentElement.style.setProperty(
                     "--primary-color",
@@ -151,7 +151,7 @@ const VerticleLayout = ({ children }) => {
                 <UserSidebar isMobile={isMobile} open={open} toggleDrawer={toggleDrawer} />
 
                 {/* Main content */}
-                <main className={`flex-1 px-2 sm:px-6 md:px-8 py-6 mt-24 mb-16  overflow-y-auto ${isMobile ? open ? "hidden" : "max-w-full" : !isMobile && open && !isRtl ? "max-w-[calc(100%-240px)]" : "max-w-full"}`}>
+                <main className={`flex-1 px-2 sm:px-6 md:px-8 py-6 mt-24 mb-16 overflow-y-auto ${isMobile ? (open ? "hidden" : "max-w-full") : (open ? "max-w-[calc(100%-240px)]" : "max-w-full")}`}>
                     {children}
                 </main>
             </div>

@@ -133,7 +133,7 @@ const Layout = ({ children }) => {
       dispatch(setWebSettings({ data }));
       dispatch(setLanguages({ data: data.languages }));
       dispatch(setDefaultLanguage({ data: data.default_language }));
-      document.dir = currentLanguage?.rtl === 1 ? "rtl" : "ltr";
+      document.dir = "ltr"; // Always set to LTR
       return true;
     } catch (error) {
       console.error("Failed to fetch web settings:", error);
@@ -168,7 +168,7 @@ const Layout = ({ children }) => {
           web_language_file: 1,
         });
         if (response?.data?.rtl === 1) {
-          document.dir = "rtl";
+          document.dir = "ltr";
         } else {
           document.dir = "ltr";
         }

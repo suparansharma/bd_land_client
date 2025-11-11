@@ -255,7 +255,8 @@ const SubscriptionSwiper = () => {
           },
           confirmButtonText: t("ok"),
         }).then(() => {
-          router.push(`/${locale}/contact-us`);
+          // router.push(`/${locale}/contact-us`);
+          router.push(`/${locale}/user/add-property`);
         });
       }
     }

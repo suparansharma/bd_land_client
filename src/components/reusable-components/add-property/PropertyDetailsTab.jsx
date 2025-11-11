@@ -233,10 +233,12 @@ const PropertyDetailsTab = ({
                 <div className='space-y-4'>
                     {(isDefaultLanguage(selectedLanguage) || selectedLanguage === activeLanguage) && selectedCategory && (
                         <>
-                            <h3 className="font-medium mb-2">{t("selectedCategory")}</h3>
+                            <h3 className="font-medium mb-2">{t("selectedCategory")} :  <span>
+                                    {selectedCategory && selectedCategory?.category}
+                                </span></h3>
                             <div className={`flex items-center gap-2 ${!isEditing && handleRemoveCategory ? "cursor-pointer" : ""}`}
                                 onClick={!isEditing && handleRemoveCategory ? handleRemoveCategory : undefined}>
-                                <div className="primaryColor">
+                                {/* <div className="primaryColor">
                                     <Image
                                         height={0}
                                         width={0}
@@ -244,10 +246,10 @@ const PropertyDetailsTab = ({
                                         className={"w-10 h-10 bg-white rounded-full"}
                                         alt={selectedCategory && selectedCategory?.category}
                                     />
-                                </div>
-                                <span>
+                                </div> */}
+                                {/* <span>
                                     {selectedCategory && selectedCategory?.category}
-                                </span>
+                                </span> */}
                             </div>
                         </>)}
                     {/* Property Type - Only show for default/active language */}

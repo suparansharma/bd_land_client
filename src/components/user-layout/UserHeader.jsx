@@ -64,12 +64,8 @@ const UserHeader = ({ isMobile, open, toggleDrawer }) => {
                 web_language_file: 1,
             });
 
-            // Handle RTL/LTR direction
-            if (response?.data?.rtl === 1) {
-                document.dir = "rtl";
-            } else {
-                document.dir = "ltr";
-            }
+            // Always set to LTR
+            document.dir = "ltr";
             document.documentElement.lang = newLang;
             // Update Redux state with the new language data
             dispatch(setActiveLanguage({ data: newLang }));

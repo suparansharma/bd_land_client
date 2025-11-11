@@ -932,8 +932,7 @@ export const getPostedSince = (time) => {
 };
 
 export const isRTL = () => {
-  const language = store.getState().LanguageSettings?.current_language;
-  return language?.rtl === 1;
+  return false; // Always return false to force LTR
 };
 
 export const extractSchemaMarkup = (markup) => {

@@ -202,11 +202,8 @@ const Header = () => {
         language_code: newLang,
         web_language_file: 1,
       });
-      if (response?.data?.rtl === 1) {
-        document.dir = "rtl";
-      } else {
-        document.dir = "ltr";
-      }
+      // Always set to LTR
+      document.dir = "ltr";
       document.documentElement.lang = response?.data?.code;
 
 

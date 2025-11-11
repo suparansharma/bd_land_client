@@ -52,10 +52,11 @@ const AddProperty = () => {
         { id: "categories", label: t("categories") },
         { id: "propertyDetails", label: t("propertyDetails") },
         { id: "seoSettings", label: t("seoSettings") },
+         { id: "imagesVideo", label: t("imagesVideo") },
         { id: "facilities", label: t("facilities") },
         { id: "outdoorFacilities", label: t("outdoorFacilities") },
         { id: "location", label: t("location") },
-        { id: "imagesVideo", label: t("imagesVideo") },
+       
     ]
 
     // Facility Distances Form State
